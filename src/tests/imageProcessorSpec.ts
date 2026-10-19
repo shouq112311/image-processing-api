@@ -8,6 +8,7 @@ describe('Image Processor', () => {
 
     expect(existsSync(outputPath)).toBe(true);
   });
+
   it('should resize image to correct dimensions', async () => {
     const outputPath = await processImage('cat', 150, 150);
 
@@ -15,5 +16,11 @@ describe('Image Processor', () => {
 
     expect(metadata.width).toBe(150);
     expect(metadata.height).toBe(150);
+  });
+
+  it('should reject if the original image does not exist', async () => {
+    await expectAsync(
+      processImage('nonexistent-image', 150, 150),
+    ).toBeRejected();
   });
 });

@@ -48,7 +48,7 @@ Example:
 
 Original images are stored in `images/full`.
 
-Resized images are saved in `images/thumb`.
+Resized images are saved in `images/thumb`. The directory is created automatically when needed.
 
 ## Available Commands
 
@@ -59,6 +59,16 @@ Resized images are saved in `images/thumb`.
 | `npm test` | Run Jasmine tests |
 | `npm run lint` | Check code using ESLint |
 | `npm run format` | Format code using Prettier |
+
+## Testing
+
+Run all tests:
+
+```bash
+npm test
+```
+
+The project includes nine Jasmine tests covering API responses, invalid parameters, image resizing, and missing images.
 
 ## Error Handling
 
