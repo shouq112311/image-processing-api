@@ -1,5 +1,5 @@
 import sharp from 'sharp';
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 import path from 'path';
 
 const processImage = async (
@@ -14,19 +14,25 @@ const processImage = async (
     `${filename}.jpg`,
   );
 
+  const thumbDir = path.join(process.cwd(), 'images', 'thumb');
+
+  mkdirSync(thumbDir, { recursive: true });
+
   const outputPath = path.join(
-    process.cwd(),
-    'images',
-    'thumb',
+    thumbDir,
     `${filename}_${width}_${height}.jpg`,
   );
+
   if (existsSync(outputPath)) {
     console.log('Image loaded from cache');
     return outputPath;
   }
+
   console.log('Processing new image');
 
   await sharp(inputPath).resize(width, height).toFile(outputPath);
+
   return outputPath;
 };
+
 export default processImage;
